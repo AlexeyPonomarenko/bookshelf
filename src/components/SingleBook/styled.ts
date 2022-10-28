@@ -6,11 +6,14 @@ export const root = css`
   border-radius: 4px;
   padding: 8px;
   display: flex;
+  height: 328px;
+  box-sizing: border-box;
 
   &.${SINGLE_BOOK_VERTICAL_LAYOUT_CLASS} {
     border: 0;
     align-items: center;
     flex-direction: column;
+    height: auto;
   }
 `;
 
@@ -28,4 +31,27 @@ export const footer = css`
 
 export const additionalInfo = css`
   margin: 4px;
+`;
+
+export const description = css`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+
+  .${SINGLE_BOOK_VERTICAL_LAYOUT_CLASS} & {
+    display: block;
+  }
+`;
+
+export const content = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .${SINGLE_BOOK_VERTICAL_LAYOUT_CLASS} & {
+    display: block;
+  }
 `;

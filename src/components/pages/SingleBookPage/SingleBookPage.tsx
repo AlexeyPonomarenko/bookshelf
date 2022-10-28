@@ -8,14 +8,16 @@ import { SingleBook } from 'components/SingleBook';
 
 import { BookResponse } from './types';
 
-import { book } from './styled';
+import { book as bookClass } from './styled';
 
 export function SingleBookPage() {
   const { id } = useParams();
 
   const { loading, data } = useFetchData<BookResponse>({ bookId: id });
 
-  if (!data || !data.book) {
+  const book = data?.book;
+
+  if (!book) {
     return (
       <h3>
         Could not find the book. <Link to="/">Go back.</Link>
@@ -25,7 +27,7 @@ export function SingleBookPage() {
 
   return (
     <div>
-      <SingleBook book={data.book} className={book} isVerticalLayout />
+      <SingleBook book={book} className={bookClass} isVerticalLayout />
       <AppCover show={loading} />
       <Link to="/">Back to list</Link>
     </div>

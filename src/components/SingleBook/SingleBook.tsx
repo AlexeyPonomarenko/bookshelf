@@ -5,7 +5,14 @@ import { Book } from 'types';
 
 import { SINGLE_BOOK_VERTICAL_LAYOUT_CLASS } from './constants';
 
-import { root, cover, footer, additionalInfo } from './styled';
+import {
+  root,
+  cover,
+  footer,
+  content,
+  description,
+  additionalInfo,
+} from './styled';
 
 type Props = {
   book: Book;
@@ -25,9 +32,9 @@ export function SingleBook(props: Props) {
   return (
     <div className={rootClassName}>
       <img src={coverImageUrl} className={cover} />
-      <div>
+      <div className={content}>
         <h2>{title}</h2>
-        {synopsis}
+        <div className={description}>{synopsis}</div>
         <div className={footer}>
           <h4 className={additionalInfo}>Author: {author}</h4>
           <h4 className={additionalInfo}>Publisher: {publisher}</h4>
