@@ -1,6 +1,5 @@
-import debounce from 'lodash/debounce';
+import React, { useState, useEffect } from 'react';
 import { FixedSizeList as List } from 'react-window';
-import React, { useState, useCallback, ChangeEvent, useEffect } from 'react';
 
 import { BooksSearchResult } from './types';
 
@@ -8,6 +7,7 @@ import { useFetchData } from 'hooks/useFetchData';
 
 import { AppCover } from 'components/AppCover';
 
+import { Search } from './components/Search';
 import { BookRow } from './components/BookRow';
 
 import { search } from './styled';
@@ -31,13 +31,6 @@ export function AllBooksPage() {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  const onSearchChange = useCallback(
-    debounce((e: ChangeEvent<HTMLInputElement>) => {
-      setSearchTerm(e.target.value);
-    }, 300),
-    []
-  );
-
   const { data, loading } = useFetchData<BooksSearchResult>({
     searchTerm,
   });
@@ -46,10 +39,10 @@ export function AllBooksPage() {
 
   return (
     <div>
-      <input
-        onChange={onSearchChange}
-        placeholder="Search..."
+      <Search
         className={search}
+        disabled={loading}
+        setSearchTerm={setSearchTerm}
       />
 
       <List

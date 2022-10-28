@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { root, loader, circle } from './styled';
 
@@ -9,7 +9,21 @@ interface Props {
 export function AppCover(props: Props) {
   const { show } = props;
 
-  if (!show) {
+  const [internalShow, setInternalShow] = useState(false);
+
+  useEffect(() => {
+    if (show) {
+      setInternalShow(true);
+    } else {
+      setTimeout(() => {
+        if (!show) {
+          setInternalShow(false);
+        }
+      }, 500);
+    }
+  }, [show]);
+
+  if (!internalShow) {
     return null;
   }
 
